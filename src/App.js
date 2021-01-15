@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.css";
 
-export default function App() {
+function Button(props) {
+  let handleClick = () => props.onClickFunction(props.increamentValue);
+  return <button onClick={handleClick}>+{props.increamentValue}</button>;
+}
+function Display(props) {
+  return <div>{props.counterValue}</div>;
+}
+function Apps() {
+  const [counter, setCounter] = useState(0);
+  const handleIncrement = (incrementValue) =>
+    setCounter(counter + incrementValue);
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
+    <>
+      <Button onClickFunction={handleIncrement} increamentValue={1} />
+      <Button onClickFunction={handleIncrement} increamentValue={5} />
+      <Button onClickFunction={handleIncrement} increamentValue={7} />
+      <Button onClickFunction={handleIncrement} increamentValue={10} />
+      <Display counterValue={counter} />
+    </>
   );
+}
+export default function App() {
+  return <Apps />;
 }
